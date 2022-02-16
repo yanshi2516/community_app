@@ -1,5 +1,7 @@
 import 'package:community_app/resources/color_resources.dart';
 import 'package:community_app/ui/base/base_stateful_widget.dart';
+import 'package:community_app/ui/call_screen/audio_call_screen.dart';
+import 'package:community_app/ui/call_screen/video_call_screen.dart';
 import 'package:community_app/ui/chat_detail_screen/chat_detail_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -248,16 +250,32 @@ class _ChatScreenState extends BaseStatefulWidgetState<ChatScreen>
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(
-                Icons.video_call_outlined,
-                color: kLightBlueColor,
-                size: 25,
+              InkWell(
+                onTap: () {
+                  push(const VideoCallScreen());
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(2),
+                  child: Icon(
+                    Icons.videocam_outlined,
+                    color: kLightBlueColor,
+                    size: 25,
+                  ),
+                ),
               ),
-              const SizedBox(width: 15),
-              Icon(
-                Icons.call_outlined,
-                color: kLightBlueColor,
-                size: 21,
+              const SizedBox(width: 10),
+              InkWell(
+                onTap: () {
+                  push(const AudioCallScreen());
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(2),
+                  child: Icon(
+                    Icons.call_outlined,
+                    color: kLightBlueColor,
+                    size: 21,
+                  ),
+                ),
               ),
             ],
           ),

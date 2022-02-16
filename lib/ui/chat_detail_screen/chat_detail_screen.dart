@@ -1,7 +1,6 @@
 import 'package:community_app/resources/color_resources.dart';
 import 'package:community_app/ui/base/base_stateful_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class ChatDetailScreen extends StatefulWidget {
   const ChatDetailScreen({Key? key}) : super(key: key);
@@ -216,9 +215,21 @@ class _ChatDetailScreenState extends BaseStatefulWidgetState<ChatDetailScreen> {
             textInputAction: TextInputAction.done,
             decoration: InputDecoration(
               isDense: true,
-              prefixIcon: const Icon(Icons.attachment),
+              prefixIcon: const Icon(
+                Icons.attachment,
+                color: kGreyColor,
+                size: 22,
+              ),
               prefixIconColor: kGreyColor,
-              suffixIcon: const Icon(Icons.mic_none),
+              suffixIcon: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: const [
+                  Icon(Icons.mic_none,color: kGreyColor,size: 22,),
+                  SizedBox(width: 12),
+                  Icon(Icons.send,size: 30,color: kBlueColor,),
+                  SizedBox(width: 12),
+                ],
+              ),
               hintText: "Type a message",
               hintStyle: Theme.of(context).textTheme.bodyText2?.copyWith(
                     fontSize: 14,
