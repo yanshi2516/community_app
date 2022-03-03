@@ -9,18 +9,13 @@ AppBar CommonAppBar({
   Color? backgroundColor,
   Color? titleColor,
   Widget? titleWidget,
-  Widget leadingIcon = const Icon(Icons.keyboard_arrow_left, color: kTealColor),
+  Widget leadingIcon = const Icon(Icons.keyboard_backspace, color: kWhiteColor),
   void Function()? onLeadingIconTap,
 }) {
   return AppBar(
     automaticallyImplyLeading: showLeading,
     leading: showLeading
-        ? IconButton(
-            iconSize: 32,
-            icon: leadingIcon,
-            onPressed: onLeadingIconTap,
-            color: kWhiteColor,
-          )
+        ? IconButton(onPressed: onLeadingIconTap, icon: leadingIcon)
         : const SizedBox.shrink(),
     leadingWidth: 80,
     centerTitle: true,
