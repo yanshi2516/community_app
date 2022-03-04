@@ -1,6 +1,8 @@
 import 'package:community_app/resources/color_resources.dart';
 import 'package:community_app/ui/base/base_stateful_widget.dart';
+import 'package:community_app/widgets/common_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -9,7 +11,97 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends BaseStatefulWidgetState<HomeScreen> {
+class _HomeScreenState extends BaseStatefulWidgetState<HomeScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+  final List<String> _tabList = [
+    "Admin",
+    "Committee",
+    "New Post",
+    "Trending",
+    "Admin Posts",
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(
+      length: _tabList.length,
+      vsync: this,
+    );
+  }
+
+  @override
+  PreferredSizeWidget buildAppBar(BuildContext context) {
+    return AppBar(
+      elevation: 5,
+      backgroundColor: kWhiteColor,
+      title: Text(
+        "Home",
+        style: theme.textTheme.subtitle2,
+      ),
+      titleSpacing: 0.0,
+      leading: IconButton(
+        onPressed: () {},
+        icon: Image.asset(
+          "assets/images/profile_image.png",
+          height: 30,
+          width: 30,
+          fit: BoxFit.fill,
+        ),
+      ),
+      actions: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            decoration: BoxDecoration(
+              color: kBlueColor.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const FaIcon(
+                  FontAwesomeIcons.medal,
+                  color: Colors.amber,
+                  size: 16,
+                ),
+                const SizedBox(width: 5),
+                Text(
+                  "5",
+                  style: theme.textTheme.subtitle1,
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(width: 10),
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.notifications_none_outlined),
+          color: kBlueColor,
+        ),
+        const SizedBox(width: 10),
+      ],
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(50),
+        child: TabBar(
+          indicatorWeight: 3,
+          indicatorColor: kBlueColor,
+          isScrollable: true,
+          labelColor: kBlueColor,
+          unselectedLabelColor: kGreyColor,
+          controller: _tabController,
+          tabs: List.generate(_tabList.length, (index) {
+            return Tab(text: _tabList[index]);
+          }),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget buildBody() {
     return SingleChildScrollView(
@@ -17,73 +109,12 @@ class _HomeScreenState extends BaseStatefulWidgetState<HomeScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         child: Column(
           children: [
-            // _buildStoriesWidget(),
             _buildFeedListWidget(),
           ],
         ),
       ),
     );
   }
-
-  /*Widget _buildStoriesWidget() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Stories",
-          style: theme.textTheme.subtitle2?.copyWith(
-            color: kDarkTealColor,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 25),
-        SizedBox(
-          height: 100,
-          child: ListView.separated(
-            itemCount: 10,
-            physics: const ClampingScrollPhysics(),
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              return SizedBox(
-                width: 80,
-                child: Column(
-                  children: [
-                    Container(
-                      height: 50,
-                      width: 50,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: Image.asset("assets/images/profile_image.png")
-                              .image,
-                          fit: BoxFit.fill,
-                        ),
-                        border: Border.all(color: kBlueColor, width: 3),
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      "Inverrsee Bhatt",
-                      style: theme.textTheme.bodyText2?.copyWith(
-                        fontSize: 14,
-                        color: kDarkTealColor,
-                        letterSpacing: 0.2,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              );
-            },
-            separatorBuilder: (context, index) {
-              return const SizedBox(width: 16);
-            },
-          ),
-        ),
-      ],
-    );
-  }*/
 
   Widget _buildFeedListWidget() {
     return ListView.separated(
