@@ -1,6 +1,6 @@
 import 'package:community_app/resources/color_resources.dart';
 import 'package:community_app/ui/base/base_stateful_widget.dart';
-import 'package:community_app/ui/chat_screen/chat_screen.dart';
+import 'package:community_app/ui/messages_screen/messages_screen.dart';
 import 'package:community_app/ui/create_post_screen/create_post_screen.dart';
 import 'package:community_app/ui/home_screen/home_screen.dart';
 import 'package:community_app/ui/members_screen/members_screen.dart';
@@ -23,7 +23,7 @@ class _MainScreenState extends BaseStatefulWidgetState<MainScreen> {
     const HomeScreen(),
     const MembersScreen(),
     const CreatePostScreen(),
-    const ChatScreen(),
+    const MessagesScreen(),
     const ProfileScreen(),
   ];
   int _currentIndex = 0;

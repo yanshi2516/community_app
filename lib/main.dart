@@ -1,5 +1,4 @@
- import 'package:community_app/ui/main_screen/main_screen.dart';
-import 'package:community_app/ui/welcome_screen/welcome_screen.dart';
+import 'package:community_app/ui/main_screen/main_screen.dart';
 import 'package:community_app/utils/shared_preferences_helper.dart';
 import 'package:community_app/resources/style_resources.dart';
 import 'package:flutter/material.dart';

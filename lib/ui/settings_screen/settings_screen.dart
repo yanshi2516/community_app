@@ -1,8 +1,9 @@
 import 'package:community_app/resources/color_resources.dart';
 import 'package:community_app/ui/base/base_stateful_widget.dart';
-import 'package:community_app/ui/settings_screen/privacy_policy_screen.dart';
 import 'package:community_app/widgets/common_app_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -25,172 +26,257 @@ class _SettingsScreenState extends BaseStatefulWidgetState<SettingsScreen> {
 
   @override
   Widget buildBody() {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 30),
-        child: Column(
-          children: [
-            _buildGeneralSettingsWidget(),
-            const SizedBox(height: 50),
-            _buildSupportSettingsWidget(),
-          ],
+    return Column(
+      children: [
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                _buildProfileWidget(),
+                const SizedBox(height: 16),
+                _buildSettingsListWidget(),
+                const SizedBox(height: 30),
+                _buildReviewWidget(),
+                const SizedBox(height: 30),
+              ],
+            ),
+          ),
         ),
+        Container(
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "V 0.0.1",
+                style: theme.textTheme.subtitle1?.copyWith(
+                  color: kDarkGreyColor,
+                ),
+              ),
+              InkWell(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(
+                      Icons.logout,
+                      color: Colors.red,
+                    ),
+                    const SizedBox(width: 5),
+                    Text(
+                      "Logout",
+                      style: theme.textTheme.subtitle1?.copyWith(
+                        fontSize: 14,
+                        color: Colors.red,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildProfileWidget() {
+    return Container(
+      color: kBlueColor,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+      child: Row(
+        children: [
+          Container(
+            height: 70,
+            width: 70,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                image: Image.asset("assets/images/profile_image.png").image,
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
+          const SizedBox(width: 16),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Inverrsee Bhatt",
+                style: theme.textTheme.bodyText2?.copyWith(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: kWhiteColor,
+                  letterSpacing: 0.5,
+                ),
+              ),
+              const SizedBox(height: 5),
+              Text(
+                "1234567890",
+                style: theme.textTheme.subtitle1?.copyWith(
+                  fontSize: 16,
+                  color: kWhiteColor,
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
 
-  Widget _buildGeneralSettingsWidget() {
+  Widget _buildSettingsListWidget() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "General",
-          style: theme.textTheme.subtitle1?.copyWith(
-            color: kDarkGreyColor,
-            letterSpacing: 1.0,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        const SizedBox(height: 5),
         ListTile(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 0),
-          title: Text(
-            "Push Notification",
-            style: theme.textTheme.subtitle1?.copyWith(
-              color: kDarkGreyColor,
-              letterSpacing: 1.0,
-              fontWeight: FontWeight.w400,
-            ),
+          leading: const Icon(
+            Icons.volunteer_activism,
+            color: kBlueColor,
           ),
-          trailing: const Icon(
-            Icons.keyboard_arrow_right_outlined,
-            color: kDarkTealColor,
-            size: 28,
+          title: Text(
+            "My Donations",
+            style: theme.textTheme.bodyText2?.copyWith(
+              color: kBlueColor,
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
         ListTile(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 0),
-          title: Text(
-            "Blocked Users",
-            style: theme.textTheme.subtitle1?.copyWith(
-              color: kDarkGreyColor,
-              letterSpacing: 1.0,
-              fontWeight: FontWeight.w400,
-            ),
+          leading: const FaIcon(
+            FontAwesomeIcons.language,
+            color: kBlueColor,
           ),
-          trailing: const Icon(
-            Icons.keyboard_arrow_right_outlined,
-            color: kDarkTealColor,
-            size: 28,
+          title: Text(
+            "Change Language",
+            style: theme.textTheme.bodyText2?.copyWith(
+              color: kBlueColor,
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
         ListTile(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 0),
-          title: Text(
-            "Linked Accounts",
-            style: theme.textTheme.subtitle1?.copyWith(
-              color: kDarkGreyColor,
-              letterSpacing: 1.0,
-              fontWeight: FontWeight.w400,
-            ),
+          leading: const Icon(
+            Icons.image_rounded,
+            color: kBlueColor,
           ),
-          trailing: const Icon(
-            Icons.keyboard_arrow_right_outlined,
-            color: kDarkTealColor,
-            size: 28,
+          title: Text(
+            "Quotes",
+            style: theme.textTheme.bodyText2?.copyWith(
+              color: kBlueColor,
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
         ListTile(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 0),
-          title: Text(
-            "Language",
-            style: theme.textTheme.subtitle1?.copyWith(
-              color: kDarkGreyColor,
-              letterSpacing: 1.0,
-              fontWeight: FontWeight.w400,
-            ),
+          leading: const FaIcon(
+            CupertinoIcons.person_2_fill,
+            color: kBlueColor,
           ),
-          trailing: const Icon(
-            Icons.keyboard_arrow_right_outlined,
-            color: kDarkTealColor,
-            size: 28,
+          title: Text(
+            "Create your sanstha/group/community",
+            style: theme.textTheme.bodyText2?.copyWith(
+              color: kBlueColor,
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
         ListTile(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 0),
-          title: Text(
-            "Search History",
-            style: theme.textTheme.subtitle1?.copyWith(
-              color: kDarkGreyColor,
-              letterSpacing: 1.0,
-              fontWeight: FontWeight.w400,
-            ),
+          leading: const Icon(
+            Icons.security,
+            color: kBlueColor,
           ),
-          trailing: const Icon(
-            Icons.keyboard_arrow_right_outlined,
-            color: kDarkTealColor,
-            size: 28,
+          title: Text(
+            "Privacy Policy",
+            style: theme.textTheme.bodyText2?.copyWith(
+              color: kBlueColor,
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
         ListTile(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 0),
+          leading: const Icon(
+            CupertinoIcons.doc_fill,
+            color: kBlueColor,
+          ),
           title: Text(
-            "Report a Problem",
-            style: theme.textTheme.subtitle1?.copyWith(
-              color: kDarkGreyColor,
-              letterSpacing: 1.0,
-              fontWeight: FontWeight.w400,
+            "Terms & Condition",
+            style: theme.textTheme.bodyText2?.copyWith(
+              color: kBlueColor,
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
             ),
           ),
-          trailing: const Icon(
-            Icons.keyboard_arrow_right_outlined,
-            color: kDarkTealColor,
-            size: 28,
+        ),
+        ListTile(
+          leading: const Icon(
+            Icons.share,
+            color: kBlueColor,
+          ),
+          title: Text(
+            "Share with friends and family",
+            style: theme.textTheme.bodyText2?.copyWith(
+              color: kBlueColor,
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+        ListTile(
+          leading: const Icon(
+            Icons.cloud_upload,
+            color: kBlueColor,
+          ),
+          title: Text(
+            "Upload Documents",
+            style: theme.textTheme.bodyText2?.copyWith(
+              color: kBlueColor,
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+        ListTile(
+          leading: const Icon(
+            Icons.logout,
+            color: kBlueColor,
+          ),
+          title: Text(
+            "Leave Community",
+            style: theme.textTheme.bodyText2?.copyWith(
+              color: kBlueColor,
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+        ListTile(
+          leading: const Icon(
+            Icons.delete_rounded,
+            color: kBlueColor,
+          ),
+          title: Text(
+            "Delete Account",
+            style: theme.textTheme.bodyText2?.copyWith(
+              color: kBlueColor,
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
       ],
     );
   }
 
-  Widget _buildSupportSettingsWidget() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Support",
-          style: theme.textTheme.subtitle1?.copyWith(
-            color: kDarkGreyColor,
-            letterSpacing: 1.0,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        const SizedBox(height: 5),
-        ListTile(
-          onTap: () {
-            push(const PrivacyPolicyScreen());
-          },
-          contentPadding: const EdgeInsets.symmetric(horizontal: 0),
-          title: Text(
-            "Terms & Policy",
-            style: theme.textTheme.subtitle1?.copyWith(
-              color: kDarkGreyColor,
-              letterSpacing: 1.0,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-        ),
-        ListTile(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 0),
-          title: Text(
-            "Logout",
-            style: theme.textTheme.subtitle1?.copyWith(
-              color: Colors.red,
-              letterSpacing: 1.0,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-        ),
-      ],
+  Widget _buildReviewWidget() {
+    return Container(
+      width: double.maxFinite,
+      padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 20),
+      color: kBlueColor.withOpacity(0.2),
+
     );
   }
 }

@@ -17,31 +17,17 @@ AppBar CommonAppBar({
     leading: showLeading
         ? IconButton(onPressed: onLeadingIconTap, icon: leadingIcon)
         : const SizedBox.shrink(),
-    leadingWidth: 80,
-    centerTitle: true,
     backgroundColor: backgroundColor ?? kBlueColor,
+    titleSpacing: 0.0,
     title: titleWidget ??
         Text(
           title,
           style: TextStyle(
             color: titleColor ?? kWhiteColor,
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-            letterSpacing: 1.5,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
           ),
         ),
-    elevation: 5.0,
-    shadowColor: kBlueColor,
     actions: actions,
-    bottom: PreferredSize(
-      child: Container(),
-      preferredSize: const Size(double.maxFinite, 30),
-    ),
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-        bottomRight: Radius.circular(15),
-        bottomLeft: Radius.circular(15),
-      ),
-    ),
   );
 }
