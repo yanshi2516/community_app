@@ -1,6 +1,10 @@
 import 'package:community_app/resources/color_resources.dart';
 import 'package:community_app/ui/base/base_stateful_widget.dart';
-import 'package:community_app/widgets/common_app_bar.dart';
+import 'package:community_app/ui/home_screen/admin_posts_widget.dart';
+import 'package:community_app/ui/home_screen/admin_widget.dart';
+import 'package:community_app/ui/home_screen/committee_widget.dart';
+import 'package:community_app/ui/home_screen/new_post_widget.dart';
+import 'package:community_app/ui/home_screen/trending_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -28,6 +32,7 @@ class _HomeScreenState extends BaseStatefulWidgetState<HomeScreen>
     _tabController = TabController(
       length: _tabList.length,
       vsync: this,
+      initialIndex: 3,
     );
   }
 
@@ -104,15 +109,15 @@ class _HomeScreenState extends BaseStatefulWidgetState<HomeScreen>
 
   @override
   Widget buildBody() {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-        child: Column(
-          children: [
-            _buildFeedListWidget(),
-          ],
-        ),
-      ),
+    return TabBarView(
+      controller: _tabController,
+      children: const [
+        AdminWidget(),
+        CommitteeWidget(),
+        NewPostWidget(),
+        TrendingWidget(),
+        AdminPostsWidget(),
+      ],
     );
   }
 
